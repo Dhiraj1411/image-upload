@@ -1,25 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
+import React, { useState } from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import Fab from "@mui/material/Fab";
+import AddIcon from "@mui/icons-material/Add";
+import Album from "./album";
+import FullScreenUploadImg from "./uploadImg";
 function App() {
+  const [openUplodImg, setOpenUploadImg] = useState(false);
+  const openFullScreenUploadImg = () => {
+    setOpenUploadImg(true);
+  };
+
+  const handleClose = () => {
+    setOpenUploadImg(false);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <React.Fragment>
+      <Album />
+      <Fab
+        style={{ position: "fixed", bottom: 20, right: 20 }}
+        color="primary"
+        aria-label="add"
+        onClick={openFullScreenUploadImg}
+      >
+        <AddIcon />
+      </Fab>
+      <FullScreenUploadImg hideDialog={handleClose} open={openUplodImg} />
+    </React.Fragment>
   );
 }
 
